@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+    </style>
+  <title>Mouse Sparks Effect</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #0e1012;
+      height: 100vh;
+    }
+    h1{
+        position: absolute;
+        user-select: none;
+        font-family: "Satisfy", cursive;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3em;
+        color: hotpink;
+        text-align: center;
+  
+    }
+    
+    .spark {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: sparkAnimation 5s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes sparkAnimation {
+      0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.5) translateY(150px) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+   
+  </style>
+</head>
+<body>
+    <!-- Codewithabhi -->
+<h1>Coding Lover</h1>
+<script>
+  // Colors for the sparks
+  const sparkColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FFFF33'];
+
+  document.addEventListener('mousemove', function(event) {
+    createSpark(event.clientX, event.clientY);
+  });
+
+  function createSpark(x, y) {
+    const spark = document.createElement('div');
+    spark.classList.add('spark');
+
+    // Randomize color from the sparkColors array
+    const randomColor = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+    spark.style.backgroundColor = randomColor;
+
+    // Randomize size (slightly bigger or smaller spark)
+    const randomSize = Math.floor(Math.random() * 5) + 5;  // Sizes between 5 and 10px
+    spark.style.width = `${randomSize}px`;
+    spark.style.height = `${randomSize}px`;
+
+    document.body.appendChild(spark);
+
+    // Position the spark at the mouse coordinates
+    spark.style.left = `${x - randomSize / 2}px`;
+    spark.style.top = `${y - randomSize / 2}px`;
+
+    // Remove the spark after animation ends to avoid DOM clutter
+    setTimeout(() => {
+      spark.remove();
+    }, 2000); // Match the animation duration (2 seconds)
+  }
+</script>
+
+</body>
+</html>
